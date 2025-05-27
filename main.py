@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # API setup
 API_URL = "https://router.huggingface.co/novita/v3/openai/chat/completions"
-HEADERS = {"Authorization": "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"}
+HEADERS = {"Authorization": "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"}
 # MODEL = "deepseek/deepseek-v3-0324"
 # MODEL = "meta-llama/Llama-2-7b-chat-hf"
 MODEL = "google/gemma-3-1b-it"
