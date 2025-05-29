@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 # API setup
 API_URL = "https://router.huggingface.co/novita/v3/openai/chat/completions"
-HEADERS = {"Authorization": "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"}
+HF_API_TOKEN = os.getenv('HF_API_TOKEN', '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')  # Use env var or default
+HEADERS = {"Authorization": "Bearer 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"}
 # MODEL = "deepseek/deepseek-v3-0324"
 # MODEL = "meta-llama/Llama-2-7b-chat-hf"
 MODEL = "google/gemma-3-1b-it"
@@ -22,20 +23,24 @@ def fetchQuizFromLlama(student_topic):
                     f"Generate a quiz with 3 questions to test students on the provided topic. "
                     f"For each question, generate 4 options where only one of the options is correct. "
                     f"Format your response as follows:\n"
-                    f"**QUESTION 1:** You can use any question here and setup a couple of answers\n"
-                    f"**OPTION A:** Answer 1\n"
-                    f"**OPTION B:** Answer 2\n"
-                    f"**OPTION C:** Answer 3\n"
-                    f"**ANS:** Answer 2\n\n"
-                    f"**QUESTION 2:** 2. True or False?\n"
-                    f"**OPTION A:** True\n"
-                    f"**OPTION B:** False\n"
-                    f"**ANS:** True\n\n"
-                    f"**QUESTION 3:** 3. What is the answer to life?\n"
-                    f"**OPTION A:** 24\n"
-                    f"**OPTION B:** 42\n"
-                    f"**OPTION C:** 0\n"
-                    f"**ANS:** 42\n\n"
+                    f"**QUESTION 1:** [Your question here]?\n"
+                    f"**OPTION A:** [First option]\n"
+                    f"**OPTION B:** [Second option]\n"
+                    f"**OPTION C:** [Third option]\n"
+                    f"**OPTION D:** [Fourth option]\n"
+                    f"**ANS:** [Correct answer letter]\n\n"
+                    f"**QUESTION 2:** [Your question here]?\n"
+                    f"**OPTION A:** [First option]\n"
+                    f"**OPTION B:** [Second option]\n"
+                    f"**OPTION C:** [Third option]\n"
+                    f"**OPTION D:** [Fourth option]\n"
+                    f"**ANS:** [Correct answer letter]\n\n"
+                    f"**QUESTION 3:** [Your question here]?\n"
+                    f"**OPTION A:** [First option]\n"
+                    f"**OPTION B:** [Second option]\n"
+                    f"**OPTION C:** [Third option]\n"
+                    f"**OPTION D:** [Fourth option]\n"
+                    f"**ANS:** [Correct answer letter]\n\n"
                     f"Ensure text is properly formatted. It needs to start with a question, then the options, and finally the correct answer. "
                     f"Follow this pattern for all questions. "
                     f"Here is the student topic:\n{student_topic}"
@@ -105,6 +110,6 @@ def run_test():
     return jsonify({'quiz': "test"}), 200
 
 if __name__ == '__main__':
-    port_num = 5000
+    port_num = 5001
     print(f"App running on port {port_num}")
     app.run(port=port_num, host="0.0.0.0")
